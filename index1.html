@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Topics</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+
+            background-image: url('https://static.vecteezy.com/system/resources/thumbnails/022/925/848/small_2x/generative-ai-illustration-of-black-wall-texture-rough-background-dark-concrete-floor-abstract-dark-blue-background-smoke-smog-empty-dark-scene-neon-light-spotlights-concrete-floor-photo.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+
+        .container {
+            background: rgba(208, 209, 209, 0.5);
+            /* Semi-transparent background */
+            padding: 20px 40px;
+            border-radius: 30px;
+            box-shadow: 0 5px 15px rgba(231, 7, 223, 0.5);
+            /* Light pink shadow */
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+            margin: auto;
+            /* Center the container horizontally */
+            box-sizing: border-box;
+            /* Ensure padding is included in width calculations */
+
+            transition: box-shadow 0.3s ease, transform 0.3s ease;
+            /* Smooth transition for hover effect */
+        }
+
+        /* Responsive styles */
+
+
+        .container:hover {
+            box-shadow: 0 10px 20px rgba(148, 9, 199, 0.6);
+            /* Slightly larger light pink shadow on hover */
+            transform: translateY(-5px);
+            /* Slight lift effect on hover */
+        }
+
+        .container h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .topics {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 20px;
+        }
+
+        .topics button {
+            padding: 10px;
+            margin: 10px 0;
+            background: #469af4;
+            color: #3a3232;
+            border-color: black;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background 0.3s ease;
+        }
+
+        .topics button:hover {
+            background: #0056b3;
+        }
+
+        .question-container {
+            margin-top: 20px;
+        }
+
+        .question {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .options button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            background: #5ca8f8;
+            color: #fff;
+            border-color: black;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s ease;
+        }
+
+        .options button:hover {
+            background: #4e9df2;
+        }
+
+        .options button.correct {
+            background: #28a745;
+        }
+
+        .options button.incorrect {
+            background: #dc3545;
+        }
+
+        .feedback {
+            margin-top: 10px;
+            font-size: 16px;
+        }
+
+        .control-buttons button {
+            padding: 10px 20px;
+            margin: 10px;
+            background: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s ease;
+
+        }
+
+        .control-buttons button:hover {
+            background: #0056b3;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px 10px;
+                /* Less padding on smaller screens */
+                max-width: 90%;
+                /* Increase width to utilize more space */
+                box-shadow: 0 3px 10px rgba(231, 7, 223, 0.4);
+                /* Slightly lighter shadow */
+            }
+
+            .topics button {
+                width: 100%;
+                /* Buttons take full width on smaller screens */
+                font-size: 0.9rem;
+                /* Slightly smaller font size */
+                padding: 10px;
+                /* Adjust padding for smaller screens */
+            }
+        }
+
+        /* Extra Small Devices */
+        @media (max-width: 480px) {
+            .container {
+                padding: 10px 5px;
+                /* Further reduce padding */
+            }
+
+            .topics button {
+                font-size: 0.8rem;
+                /* Smaller font size for very small screens */
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Select a Quiz Topic</h1>
+        <div class="topics">
+            <button onclick="startQuiz('economics')">Economics</button>
+            <button onclick="startQuiz('history')">History</button>
+            <button onclick="startQuiz('currentAffairs')">Current Affairs</button>
+            <button onclick="startQuiz('generalKnowledge')">General Knowledge</button>
+        </div>
+    </div>
+
+    <script>
+        const quizQuestions = {
+            economics: [
+                {
+                    question: "What is the primary function of money?",
+                    answer: "d) Medium of exchange",
+                    options: [
+                        "a) Store of value",
+                        "b) Unit of account",
+                        "c) Standard of deferred payment",
+                        "d) Medium of exchange"
+                    ]
+                },
+                {
+                    question: "What does the term 'GDP' stand for?",
+                    answer: "b) Gross Domestic Product",
+                    options: [
+                        "a) Gross Domestic Payment",
+                        "b) Gross Domestic Product",
+                        "c) General Domestic Product",
+                        "d) Gross Demand Product"
+                    ]
+                },
+                {
+                    question: "What is inflation?",
+                    answer: "a) A general increase in prices and fall in the purchasing value of money",
+                    options: [
+                        "a) A general increase in prices and fall in the purchasing value of money",
+                        "b) A decrease in the prices of goods and services",
+                        "c) Increase in employment",
+                        "d) A strategy to balance the budget"
+                    ]
+                },
+                {
+                    question: "Who is known as the father of modern economics?",
+                    answer: "c) Adam Smith",
+                    options: [
+                        "a) John Keynes",
+                        "b) Karl Marx",
+                        "c) Adam Smith",
+                        "d) Milton Friedman"
+                    ]
+                },
+                {
+                    question: "Which economic theory advocates for minimal government intervention in the market?",
+                    answer: "a) Laissez-faire",
+                    options: [
+                        "a) Laissez-faire",
+                        "b) Keynesian",
+                        "c) Marxism",
+                        "d) Monetarism"
+                    ]
+                },
+                {
+                    question: "What is the primary objective of monetary policy?",
+                    answer: "b) Control inflation",
+                    options: [
+                        "a) Increase employment",
+                        "b) Control inflation",
+                        "c) Boost exports",
+                        "d) Decrease taxes"
+                    ]
+                },
+                {
+                    question: "What does a fiscal deficit indicate?",
+                    answer: "c) Government's expenditure exceeds its revenue",
+                    options: [
+                        "a) Surplus in government budget",
+                        "b) Equal government income and expenditure",
+                        "c) Government's expenditure exceeds its revenue",
+                        "d) Government's revenue exceeds its expenditure"
+                    ]
+                },
+                {
+                    question: "Which organization is known as the lender of last resort?",
+                    answer: "a) International Monetary Fund (IMF)",
+                    options: [
+                        "a) International Monetary Fund (IMF)",
+                        "b) World Bank",
+                        "c) United Nations",
+                        "d) World Trade Organization (WTO)"
+                    ]
+                },
+                {
+                    question: "What is the 'invisible hand' concept in economics?",
+                    answer: "d) The self-regulating nature of the market",
+                    options: [
+                        "a) Government intervention in markets",
+                        "b) Role of financial institutions",
+                        "c) Price controls by the government",
+                        "d) The self-regulating nature of the market"
+                    ]
+                },
+                {
+                    question: "Which type of market structure is characterized by a single seller?",
+                    answer: "a) Monopoly",
+                    options: [
+                        "a) Monopoly",
+                        "b) Oligopoly",
+                        "c) Monopolistic competition",
+                        "d) Perfect competition"
+                    ]
+                }
+            ],
+
+            history: [
+                {
+                    question: "Who was the first emperor of the Mughal Empire?",
+                    answer: "b) Babur",
+                    options: [
+                        "a) Akbar",
+                        "b) Babur",
+                        "c) Humayun",
+                        "d) Aurangzeb"
+                    ]
+                },
+                {
+                    question: "What year did India gain independence from British rule?",
+                    answer: "c) 1947",
+                    options: [
+                        "a) 1945",
+                        "b) 1950",
+                        "c) 1947",
+                        "d) 1939"
+                    ]
+                },
+                {
+                    question: "Who was the first President of the United States?",
+                    answer: "a) George Washington",
+                    options: [
+                        "a) George Washington",
+                        "b) Thomas Jefferson",
+                        "c) Abraham Lincoln",
+                        "d) John Adams"
+                    ]
+                },
+                {
+                    question: "Which event marked the beginning of World War II?",
+                    answer: "b) Invasion of Poland by Germany",
+                    options: [
+                        "a) Attack on Pearl Harbor",
+                        "b) Invasion of Poland by Germany",
+                        "c) Bombing of Hiroshima",
+                        "d) Battle of Stalingrad"
+                    ]
+                },
+                {
+                    question: "Who was known as the 'Iron Lady'?",
+                    answer: "d) Margaret Thatcher",
+                    options: [
+                        "a) Indira Gandhi",
+                        "b) Golda Meir",
+                        "c) Angela Merkel",
+                        "d) Margaret Thatcher"
+                    ]
+                },
+                {
+                    question: "Which ancient civilization is known for building the pyramids?",
+                    answer: "a) Egyptian",
+                    options: [
+                        "a) Egyptian",
+                        "b) Greek",
+                        "c) Roman",
+                        "d) Mayan"
+                    ]
+                },
+                {
+                    question: "What was the primary cause of the American Civil War?",
+                    answer: "c) Slavery",
+                    options: [
+                        "a) Taxes",
+                        "b) Trade disputes",
+                        "c) Slavery",
+                        "d) Territorial expansion"
+                    ]
+                },
+                {
+                    question: "Who discovered the sea route to India?",
+                    answer: "b) Vasco da Gama",
+                    options: [
+                        "a) Christopher Columbus",
+                        "b) Vasco da Gama",
+                        "c) Ferdinand Magellan",
+                        "d) Marco Polo"
+                    ]
+                },
+                {
+                    question: "Which empire was ruled by Genghis Khan?",
+                    answer: "c) Mongol Empire",
+                    options: [
+                        "a) Roman Empire",
+                        "b) Ottoman Empire",
+                        "c) Mongol Empire",
+                        "d) Persian Empire"
+                    ]
+                },
+                {
+                    question: "The Great Wall of China was built to protect against invasions from which group?",
+                    answer: "a) Mongols",
+                    options: [
+                        "a) Mongols",
+                        "b) Japanese",
+                        "c) Persians",
+                        "d) Russians"
+                    ]
+                }
+            ],
+
+            currentAffairs: [
+                {
+                    question: "Which country hosted the 2024 Summer Olympics?",
+                    answer: "c) Paris, France",
+                    options: [
+                        "a) Tokyo, Japan",
+                        "b) Los Angeles, USA",
+                        "c) Paris, France",
+                        "d) Beijing, China"
+                    ]
+                },
+                {
+                    question: "Who is the current Secretary-General of the United Nations?",
+                    answer: "b) António Guterres",
+                    options: [
+                        "a) Ban Ki-moon",
+                        "b) António Guterres",
+                        "c) Kofi Annan",
+                        "d) Kurt Waldheim"
+                    ]
+                },
+                {
+                    question: "Which country won the FIFA World Cup in 2022?",
+                    answer: "a) Argentina",
+                    options: [
+                        "a) Argentina",
+                        "b) France",
+                        "c) Brazil",
+                        "d) Germany"
+                    ]
+                },
+                {
+                    question: "In which country did the 2023 G20 Summit take place?",
+                    answer: "d) India",
+                    options: [
+                        "a) Japan",
+                        "b) USA",
+                        "c) Italy",
+                        "d) India"
+                    ]
+                },
+                {
+                    question: "Who was awarded the Nobel Peace Prize in 2023?",
+                    answer: "c) Narges Mohammadi",
+                    options: [
+                        "a) Malala Yousafzai",
+                        "b) Abiy Ahmed",
+                        "c) Narges Mohammadi",
+                        "d) Greta Thunberg"
+                    ]
+                },
+                {
+                    question: "Which company became the first to reach a $3 trillion market cap in 2023?",
+                    answer: "a) Apple",
+                    options: [
+                        "a) Apple",
+                        "b) Microsoft",
+                        "c) Amazon",
+                        "d) Google"
+                    ]
+                },
+                {
+                    question: "Which country launched the Artemis I mission to the Moon?",
+                    answer: "b) USA",
+                    options: [
+                        "a) Russia",
+                        "b) USA",
+                        "c) China",
+                        "d) India"
+                    ]
+                },
+                {
+                    question: "Which city was chosen to host the 2028 Summer Olympics?",
+                    answer: "b) Los Angeles, USA",
+                    options: [
+                        "a) Paris, France",
+                        "b) Los Angeles, USA",
+                        "c) Tokyo, Japan",
+                        "d) Berlin, Germany"
+                    ]
+                },
+                {
+                    question: "Who is the current Prime Minister of the United Kingdom as of 2024?",
+                    answer: "a) Rishi Sunak",
+                    options: [
+                        "a) Rishi Sunak",
+                        "b) Boris Johnson",
+                        "c) Liz Truss",
+                        "d) Theresa May"
+                    ]
+                },
+                {
+                    question: "What is the theme for World Environment Day 2024?",
+                    answer: "c) Beat Plastic Pollution",
+                    options: [
+                        "a) Save the Earth",
+                        "b) Climate Action",
+                        "c) Beat Plastic Pollution",
+                        "d) Go Green"
+                    ]
+                }
+            ],
+
+            generalKnowledge: [
+                {
+                    question: "What is the capital city of Australia?",
+                    answer: "c) Canberra",
+                    options: [
+                        "a) Sydney",
+                        "b) Melbourne",
+                        "c) Canberra",
+                        "d) Brisbane"
+                    ]
+                },
+                {
+                    question: "Which planet is known as the Red Planet?",
+                    answer: "b) Mars",
+                    options: [
+                        "a) Venus",
+                        "b) Mars",
+                        "c) Jupiter",
+                        "d) Saturn"
+                    ]
+                },
+                {
+                    question: "Who wrote the play 'Romeo and Juliet'?",
+                    answer: "a) William Shakespeare",
+                    options: [
+                        "a) William Shakespeare",
+                        "b) Charles Dickens",
+                        "c) Jane Austen",
+                        "d) Mark Twain"
+                    ]
+                },
+                {
+                    question: "What is the largest ocean on Earth?",
+                    answer: "c) Pacific Ocean",
+                    options: [
+                        "a) Atlantic Ocean",
+                        "b) Indian Ocean",
+                        "c) Pacific Ocean",
+                        "d) Arctic Ocean"
+                    ]
+                },
+                {
+                    question: "Which element has the chemical symbol 'O'?",
+                    answer: "d) Oxygen",
+                    options: [
+                        "a) Gold",
+                        "b) Silver",
+                        "c) Iron",
+                        "d) Oxygen"
+                    ]
+                },
+                {
+                    question: "What is the name of the longest river in the world?",
+                    answer: "a) Nile",
+                    options: [
+                        "a) Nile",
+                        "b) Amazon",
+                        "c) Yangtze",
+                        "d) Mississippi"
+                    ]
+                },
+                {
+                    question: "In which year did the Titanic sink?",
+                    answer: "b) 1912",
+                    options: [
+                        "a) 1905",
+                        "b) 1912",
+                        "c) 1920",
+                        "d) 1930"
+                    ]
+                },
+                {
+                    question: "What is the hardest natural substance on Earth?",
+                    answer: "a) Diamond",
+                    options: [
+                        "a) Diamond",
+                        "b) Gold",
+                        "c) Silver",
+                        "d) Platinum"
+                    ]
+                },
+                {
+                    question: "Which country is known as the Land of the Rising Sun?",
+                    answer: "d) Japan",
+                    options: [
+                        "a) China",
+                        "b) India",
+                        "c) Thailand",
+                        "d) Japan"
+                    ]
+                },
+                {
+                    question: "Who is the author of the 'Harry Potter' series?",
+                    answer: "c) J.K. Rowling",
+                    options: [
+                        "a) J.R.R. Tolkien",
+                        "b) George R.R. Martin",
+                        "c) J.K. Rowling",
+                        "d) C.S. Lewis"
+                    ]
+                }
+            ],
+
+        };
+
+        function startQuiz(topic) {
+            const questions = quizQuestions[topic];
+            let currentQuestionIndex = 0;
+            let userScore = 0;
+
+            document.querySelector('.container').innerHTML = `
+                <h1>${capitalize(topic)} Quiz</h1>
+                <div class="score">Score: <span id="score">0</span></div>
+                <div id="question-container" class="question-container"></div>
+                <div class="feedback"></div>
+                <div class="control-buttons">
+                <button onclick="backToTopics()">Back</button>
+
+                <button onclick="nextQuestion('${topic}')">Next</button>
+
+                </div>
+            `;
+
+            loadQuestion(questions[currentQuestionIndex]);
+
+            function loadQuestion(questionObj) {
+                const questionContainer = document.getElementById('question-container');
+                questionContainer.innerHTML = `
+                    <div class="question">${questionObj.question}</div>
+                    <div class="options">
+                        ${questionObj.options.map((option) => `
+                            <button onclick="selectOption('${option}', '${questionObj.answer}')">${option}</button>
+                        `).join('')}
+                    </div>
+                `;
+                document.querySelector('.feedback').innerHTML = '';
+            }
+
+            window.selectOption = function (selectedOption, correctAnswer) {
+                const options = document.querySelectorAll('.options button');
+                options.forEach(option => {
+                    option.disabled = true;
+                    if (option.textContent === correctAnswer) {
+                        option.classList.add('correct');
+                    } else if (option.textContent === selectedOption) {
+                        option.classList.add('incorrect');
+                    }
+                });
+
+                const feedbackDiv = document.querySelector('.feedback');
+                if (selectedOption === correctAnswer) {
+                    userScore++;
+                    feedbackDiv.innerHTML = `Correct! Your score is now ${userScore}.`;
+                    feedbackDiv.style.color = "green";
+                } else {
+                    feedbackDiv.innerHTML = `Incorrect. The correct answer is: ${correctAnswer}. Your score is still ${userScore}.;
+                    feedbackDiv.style.color = "red"`;
+                }
+
+                document.getElementById('score').textContent = userScore;
+            };
+
+            window.nextQuestion = function (topic) {
+                currentQuestionIndex++;
+                if (currentQuestionIndex < questions.length) {
+                    loadQuestion(questions[currentQuestionIndex]);
+                } else {
+                    document.querySelector('.container').innerHTML = `
+                        <h1>Quiz Completed!</h1>
+                        <p>Your final score is ${userScore} out of ${questions.length}.</p>
+                        <button onclick="location.reload()">Try Another Quiz</button>
+                    `;
+                }
+            };
+
+            // Function to go back to the quiz topic selection page
+            window.backToTopics = function () {
+                document.querySelector('.container').innerHTML = `
+                    <h1>Select a Quiz Topic</h1>
+                    <div class="topics">
+                        <button onclick="startQuiz('economics')">Economics</button>
+                        <button onclick="startQuiz('history')">History</button>
+                        <button onclick="startQuiz('currentAffairs')">Current Affairs</button>
+                        <button onclick="startQuiz('generalKnowledge')">General Knowledge</button>
+                    </div>
+                `;
+            };
+        }
+
+        function capitalize(string) {
+            return string.charAt(0).toUpperCase() + string.slice(1);
+        }
+    </script>
+</body>
+
+</html>

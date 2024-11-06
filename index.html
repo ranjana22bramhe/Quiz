@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Website</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: #f4f4f4;
+            background-image:url("https://w0.peakpx.com/wallpaper/38/39/HD-wallpaper-abstract-hexagon-blue-light.jpg");
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        
+        .container {
+    text-align: center;
+    background: rgba(2, 2, 2, 0.5); /* Set the background to a semi-transparent black */
+    padding: 40px 20px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(246, 245, 245, 0.969);
+    max-width: 400px;
+    width: 100%;
+}
+
+
+        .container h1 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            color: #0cf2f6;
+        }
+
+        .container p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            color: white;
+        }
+
+        .start-btn {
+            padding: 12px 25px;
+            background: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background 0.3s ease;
+        }
+        .start-btn {
+    background: #3498db; /* Initial background color */
+    transition: background 0.5s ease; /* Smooth transition over 0.5 seconds */
+}
+
+.start-btn:hover {
+    animation: pulse 1s ease infinite; /* Apply pulse animation on hover */
+}
+
+/* Define keyframe animation */
+@keyframes pulse {
+    0% {
+        background-color: #3498db; /* Start color */
+    }
+    50% {
+        background-color: #c71acd; /* Mid color (lighter) */
+    }
+    100% {
+        background-color: #6823df; /* End color (back to start) */
+    }
+}
+@media (max-width: 768px) {
+            .container h1 {
+                font-size: 28px;
+            }
+
+            .container p {
+                font-size: 16px;
+            }
+
+            .start-btn {
+                font-size: 16px;
+                padding: 10px 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container h1 {
+                font-size: 24px;
+            }
+
+            .container p {
+                font-size: 14px;
+            }
+
+            .start-btn {
+                font-size: 14px;
+                padding: 8px 16px;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Welcome to the Quiz!</h1>
+        <p>Test your knowledge with our exciting quiz. Click the button below to start!</p>
+        <a href="index1.html"><button class="start-btn" onclick="startQuiz()">Start Quiz</button></a>
+    </div>
+
+    <script>
+        function startQuiz() {
+            // Replace the following line with the actual logic to start the quiz
+            window.location.href = 'quiz-page.html'; // Example: Redirect to the quiz page
+        }
+    </script>
+</body>
+
+</html>
